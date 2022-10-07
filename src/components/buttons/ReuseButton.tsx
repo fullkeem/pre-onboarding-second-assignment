@@ -1,10 +1,11 @@
 import styled from 'styled-components';
+import { BtnPropsData } from '../../interface';
 
-const reuseButton = ({ background, text }: any) => {
+const reuseButton = ({ background, text }: BtnPropsData) => {
   return <Button background={background}>{text}</Button>;
 };
 
-const Button = styled.button`
+const Button = styled.button<{ background: string }>`
   display: flex;
   padding: 10px 15px;
 
