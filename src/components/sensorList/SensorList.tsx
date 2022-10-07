@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { SensorInfo } from '../../interface';
-import Button from '../buttons/reuseButton';
+import Button from '../buttons/ReuseButton';
 import styled from 'styled-components';
 
 interface SensorInfoRes {

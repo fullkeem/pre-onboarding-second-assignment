@@ -1,6 +1,6 @@
 import LinearChart from './LinearChart';
 import Zoom from '../buttons/Zoom';
-import Button from '../buttons/reuseButton';
+import Button from '../buttons/ReuseButton';
 import styled from 'styled-components';
 
 const DataGraph = () => {
