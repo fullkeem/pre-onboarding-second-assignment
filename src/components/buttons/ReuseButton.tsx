@@ -5,7 +5,7 @@ const reuseButton = ({ background, text }: any) => {
 };
 
 const Button = styled.button`
-  display: inline-block;
+  display: flex;
   padding: 10px 15px;
 
   background-color: ${props => props.background};
