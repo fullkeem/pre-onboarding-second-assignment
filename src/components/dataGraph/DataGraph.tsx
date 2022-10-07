@@ -7,11 +7,11 @@ import Zoom from '../buttons/Zoom';
 const DataGraph = () => {
   return (
     <ChartContainer>
-      <div className='button'>
+      <div className='buttons'>
         <Zoom />
       </div>
       <LinearChart />
-      <div className='button'>
+      <div className='buttons'>
         <Button background='#FF6384' text='Export' />
       </div>
     </ChartContainer>
@@ -21,6 +21,11 @@ const DataGraph = () => {
 const ChartContainer = styled.div`
   width: 100%;
   max-width: 600px;
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+  }
 `;
 
 export default DataGraph;

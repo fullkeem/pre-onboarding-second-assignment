@@ -27,6 +27,7 @@ const GraphZoom = styled.div`
     border: 0;
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 16px;
+    font-weight: 500;
 
     &:hover {
       cursor: pointer;
