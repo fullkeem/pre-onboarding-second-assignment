@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { useState, useEffect, useRef, useCallback } from 'react';
+
 import { getResponsiveWidth } from '../../utils/getResponsiveWidth';
 import { SelectDate, WeatherData } from '../../interface';
 import LinearChart from './chart/LinearChart';
-
-import Calendar from './Calendar';
 import Zoom from '../buttons/Zoom';
 import Button from '../buttons/ReuseButton';
+import Calendar from './Calendar';
 
 import styled from 'styled-components';
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
