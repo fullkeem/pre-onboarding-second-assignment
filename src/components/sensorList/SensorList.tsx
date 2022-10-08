@@ -1,37 +1,29 @@
-<<<<<<< HEAD
-import axios from 'axios';
-import { useState, useEffect, useMemo } from 'react';
-import { Link } from 'react-router-dom';
-import { SensorInfo } from '../../interface';
-import Button from '../buttons/ReuseButton';
-=======
 import * as React from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Columns } from './Columns';
 import { Table } from './Table';
+import { SensorInfo } from '../../interface';
 import Data from '../../assets/data/sensorInfoList.json';
->>>>>>> main
+
+import Button from '../buttons/Button';
+
 import styled from 'styled-components';
 
 const SensorList = () => {
   const columns = React.useMemo(() => Columns, []);
   const data = React.useMemo(() => Data, []);
 
-  return (
-    <StyledSection>
-      <Table columns={columns} data={data} />
-    </StyledSection>
-  );
-<<<<<<< HEAD
+  const navigate = useNavigate();
 
   return (
-    <StyledSection>
-      <Link to='/graph'>
-        <Button background='#36A2EB' text='Graph' />
-      </Link>
-    </StyledSection>
+    <>
+      <Button background='#36A2EB' text='Graph' onClick={() => navigate('/graph')} />
+      <StyledSection>
+        <Table columns={columns} data={data} />
+      </StyledSection>
+    </>
   );
-=======
->>>>>>> main
 };
 
 const StyledSection = styled.section`

@@ -1,11 +1,10 @@
 import axios from 'axios';
 import { useState, useEffect, useRef, useCallback } from 'react';
-
+import { CSVLink } from 'react-csv';
 import { getResponsiveWidth } from '../../utils/getResponsiveWidth';
 import { SelectDate, WeatherData } from '../../interface';
 import LinearChart from './chart/LinearChart';
-import Zoom from '../buttons/Zoom';
-import Button from '../buttons/ReuseButton';
+import Button from '../buttons/Button';
 import Calendar from './Calendar';
 
 import styled from 'styled-components';
@@ -64,18 +63,19 @@ const DataGraph = () => {
     setWidth((width * 5) / 6);
   }, [width]);
 
+  const csvLinkHeaders = [
+    { label: 'Created_at', key: 'Created_at' },
+    { label: 'Entry_id', key: 'Entry_id' },
+    { label: 'Temp', key: 'Temp' },
+    { label: 'Humidity', key: 'Humidity' },
+    { label: 'Pressure', key: 'Pressure' },
+  ];
+
+  const csvLinkData = weatherData?.feeds.map(data => {
+    return { Created_at: data.created_at, Entry_id: data.entry_id, Temp: data.field1, Humidity: data.field2, Pressure: data.field3 };
+  });
+
   return (
-<<<<<<< HEAD
-    <ChartContainer>
-      <div className='buttons'>
-        <Zoom />
-      </div>
-      <LinearChart />
-      <div className='buttons'>
-        <Button background='#FF6384' text='Export' />
-      </div>
-    </ChartContainer>
-=======
     <>
       {modal && <Calendar selectDate={selectDate} setSelectDate={setSelectDate} setModal={setModal} />}
       <StyledNav>
@@ -96,6 +96,9 @@ const DataGraph = () => {
               <AiFillMinusCircle />
             </IconButton>
           </div>
+          <CSVLink style={{ textDecoration: 'none' }} data={csvLinkData ?? []} headers={csvLinkHeaders} filename={`${weatherData?.channel.id}_${weatherData?.channel.description}.csv`}>
+            <Button background='#FF6384' text='Export' />
+          </CSVLink>
         </div>
       </StyledNav>
       <Container>
@@ -132,20 +135,11 @@ const DataGraph = () => {
         )}
       </Container>
     </>
->>>>>>> main
   );
 };
 
 const Container = styled.div`
   width: 100%;
-<<<<<<< HEAD
-  max-width: 600px;
-
-  .buttons {
-    display: flex;
-    justify-content: flex-end;
-  }
-=======
   max-width: 800px;
   margin: 0 auto;
   margin-top: 124px;
@@ -222,7 +216,6 @@ export const IconButton = styled.button`
   align-items: center;
   color: skyblue;
   cursor: pointer;
->>>>>>> main
 `;
 
 export default DataGraph;
