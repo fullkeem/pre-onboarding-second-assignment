@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { AiOutlineClose, AiOutlineSwapLeft, AiOutlineSwapRight } from 'react-icons/ai';
 import { SelectDate } from '../../interface';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { IconButton } from './DataGraph';
 
 interface CalendarProps {
@@ -11,6 +11,8 @@ interface CalendarProps {
 }
 
 const Calendar = ({ selectDate: { day, month, year }, setSelectDate, setModal }: CalendarProps) => {
+  const [addMonth, setAddMonth] = useState(0);
+
   useEffect(() => {
     const closeHandler = (e: MouseEvent) => {
       if (e.target instanceof Element) {
@@ -26,16 +28,16 @@ const Calendar = ({ selectDate: { day, month, year }, setSelectDate, setModal }:
   }, []);
 
   const calenderList = useMemo(() => {
-    const firstDate = new Date(year, month - 1, 1);
-    const lastDate = new Date(year, month, 0);
+    const firstDate = new Date(year, month + addMonth, 1);
+    const lastDate = new Date(year, month + addMonth + 1, 0);
 
-    const beforeLastDate = new Date(year, month - 1, 0);
+    const beforeLastDate = new Date(year, month + addMonth, 0);
     const beforeDayList = [];
 
     for (let i = 0; i < firstDate.getDay(); i++) {
       beforeDayList.push({
         month: beforeLastDate.getMonth(),
-        date: beforeLastDate.getDate() - 5 + i,
+        date: beforeLastDate.getDate() - firstDate.getDay() + i + 1,
       });
     }
 
@@ -58,20 +60,16 @@ const Calendar = ({ selectDate: { day, month, year }, setSelectDate, setModal }:
     }
 
     return [...beforeDayList, ...curDayList, ...afterDayList];
-  }, []);
+  }, [addMonth]);
 
   const changeDate = (pickData: { month: number; date: number }) => {
-    if (pickData.month === month - 1) {
-      if (pickData.date === day) {
-        setModal(false);
-      } else {
-        setSelectDate({
-          year,
-          month,
-          day: pickData.date,
-        });
-        setModal(false);
-      }
+    if (pickData.month === new Date(year, month + addMonth, day).getMonth()) {
+      setSelectDate({
+        year: new Date(year, month + addMonth, day).getFullYear(),
+        month: new Date(year, month + addMonth, day).getMonth(),
+        day: pickData.date,
+      });
+      setModal(false);
     }
   };
 
@@ -82,13 +80,16 @@ const Calendar = ({ selectDate: { day, month, year }, setSelectDate, setModal }:
           <AiOutlineClose />
         </StyledButton>
         <div className='title'>
-          <IconButton>
-            <AiOutlineSwapLeft size={30} />
-          </IconButton>
-          <h2>{month}월</h2>
-          <IconButton>
-            <AiOutlineSwapRight size={30} />
-          </IconButton>
+          <h3>{new Date(year, month + addMonth, day).getFullYear()}년</h3>
+          <div className='textContainer'>
+            <IconButton onClick={() => setAddMonth(addMonth - 1)}>
+              <AiOutlineSwapLeft size={30} />
+            </IconButton>
+            <h2>{new Date(year, month + addMonth, day).getMonth() + 1 ? new Date(year, month + addMonth, day).getMonth() + 1 : 12}월</h2>
+            <IconButton onClick={() => new Date(year, month + addMonth, day).getTime() < new Date().getTime() && setAddMonth(addMonth + 1)}>
+              <AiOutlineSwapRight size={30} />
+            </IconButton>
+          </div>
         </div>
         <WeekList>
           {['일', '월', '화', '수', '목', '금', '토'].map(week => (
@@ -101,7 +102,7 @@ const Calendar = ({ selectDate: { day, month, year }, setSelectDate, setModal }:
           {calenderList.map(calender => (
             <li //
               key={`${calender.month}-${calender.date}`}
-              className={calender.month === month - 1 ? 'active' : ''}
+              className={calender.month === new Date(year, month + addMonth, day).getMonth() ? 'active' : ''}
               onClick={() => changeDate(calender)}
             >
               {calender.date}
@@ -140,8 +141,16 @@ const StyledModal = styled.div`
     div.title {
       display: flex;
       align-items: center;
+      flex-direction: column;
       margin-bottom: 20px;
       gap: 10px;
+
+      div.textContainer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+      }
     }
 
     @media screen and (min-width: 800px) {

@@ -15,7 +15,7 @@ const timezone = 'Asia%2FSeoul';
 const DataGraph = () => {
   const [selectDate, setSelectDate] = useState<SelectDate>({
     year: new Date().getFullYear(),
-    month: new Date().getMonth() + 1,
+    month: new Date().getMonth(),
     day: new Date().getDate(),
   });
   const [weatherData, setWeatherData] = useState<WeatherData>();
@@ -26,12 +26,14 @@ const DataGraph = () => {
 
   useEffect(() => {
     (async () => {
-      const START = `${selectDate.year}-${selectDate.month.toString().padStart(2, '0')}-${selectDate.day.toString().padStart(2, '0')}%2000-00-00`;
-      const END = `${selectDate.year}-${selectDate.month.toString().padStart(2, '0')}-${(selectDate.day + 1).toString().padStart(2, '0')}%2000-00-00`;
+      const START = `${selectDate.year}-${(selectDate.month + 1).toString().padStart(2, '0')}-${selectDate.day.toString().padStart(2, '0')}%2000-00-00`;
+
+      const endDate = new Date(selectDate.year, selectDate.month, selectDate.day + 1);
+
+      const END = `${endDate.getFullYear()}-${(endDate.getMonth() + 1).toString().padStart(2, '0')}-${endDate.getDate().toString().padStart(2, '0')}%2000-00-00`;
       const URL = `https://api.thingspeak.com/channels/${CHANNEL_ID}/feeds.json?api_key=${API_KEY}&start=${START}&end=${END}&timezone=${timezone}`;
 
       const { data } = await axios.get<WeatherData>(URL);
-
       setWeatherData(data);
     })();
   }, [selectDate]);
@@ -65,7 +67,7 @@ const DataGraph = () => {
         <div className='container'>
           <div className='dateContainer'>
             <h2>
-              {selectDate.year}/{selectDate.month.toString().padStart(2, '0')}/{selectDate.day.toString().padStart(2, '0')}
+              {selectDate.year}/{(selectDate.month + 1).toString().padStart(2, '0')}/{selectDate.day.toString().padStart(2, '0')}
             </h2>
             <IconButton onClick={() => setModal(true)}>
               <BsFillCalendarCheckFill />
