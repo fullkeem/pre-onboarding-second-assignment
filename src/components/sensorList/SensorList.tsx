@@ -1,45 +1,18 @@
-import axios from 'axios';
-import { useState, useEffect, useMemo } from 'react';
-import { SensorInfo } from '../../interface';
+import * as React from 'react';
+import { Columns } from './Columns';
+import { Table } from './Table';
+import Data from '../../assets/data/sensorInfoList.json';
 import styled from 'styled-components';
 
-interface SensorInfoRes {
-  data: SensorInfo[];
-}
-
 const SensorList = () => {
-  const [infoList, setInfoList] = useState<SensorInfo[]>([]);
+  const columns = React.useMemo(() => Columns, []);
+  const data = React.useMemo(() => Data, []);
 
-  useEffect(() => {
-    (async () => {
-      const { data } = await axios.get<SensorInfoRes>('/data/sensorInfoList.json');
-      setInfoList(data.data);
-    })();
-  }, []);
-
-  const columns = useMemo(
-    () => [
-      {
-        accessor: 'thingName',
-        Header: 'Sensor ID',
-      },
-      {
-        accessor: 'Bat.(%)',
-        Header: 'Sensor ID',
-      },
-      {
-        accessor: 'Connected at',
-        Header: 'connAt',
-      },
-      {
-        accessor: 'DisConnected at',
-        Header: 'connAt',
-      },
-    ],
-    []
+  return (
+    <StyledSection>
+      <Table columns={columns} data={data} />
+    </StyledSection>
   );
-
-  return <StyledSection></StyledSection>;
 };
 
 const StyledSection = styled.section`
