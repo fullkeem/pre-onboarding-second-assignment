@@ -63,7 +63,7 @@ export const Table = ({ columns, data }: any) => {
           {'<<'}
         </button>
         <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-          Previous
+          {'<'}
         </button>
         <span>
           Page{' '}
@@ -72,7 +72,7 @@ export const Table = ({ columns, data }: any) => {
           </span>{' '}
         </span>
         <button onClick={() => nextPage()} disabled={!canNextPage}>
-          Next
+          {'>'}
         </button>
         <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
           {'>>'}
@@ -110,6 +110,7 @@ const StyledTable = styled.section`
 `;
 
 const StyledPagination = styled.div`
+  border: 1px solid black;
   width: 40%;
   margin: auto;
   margin-top: 20px;
@@ -120,7 +121,13 @@ const StyledPagination = styled.div`
   .gotoFirstPage {
     margin-left: 15px;
   }
-
+  button {
+    background-color: white;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #6ea8c9;
+  }
   .pageSize {
     margin-left: 15px;
   }
