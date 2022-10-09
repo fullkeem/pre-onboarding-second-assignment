@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState, useEffect, useRef, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { CSVLink } from 'react-csv';
 import { getResponsiveWidth } from '../../utils/getResponsiveWidth';
 import { SelectDate, WeatherData } from '../../interface';
@@ -10,12 +11,14 @@ import Calendar from './Calendar';
 import styled from 'styled-components';
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import { BsFillCalendarCheckFill } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
 const CHANNEL_ID = 1348864;
 const API_KEY = '6SKW0U97IPV2QQV9';
 const timezone = 'Asia%2FSeoul';
 
 const DataGraph = () => {
+  const navigate = useNavigate;
   const [selectDate, setSelectDate] = useState<SelectDate>({
     year: new Date().getFullYear(),
     month: new Date().getMonth(),
@@ -95,10 +98,13 @@ const DataGraph = () => {
             <IconButton onClick={zoomOut}>
               <AiFillMinusCircle />
             </IconButton>
+            <Link to='/' style={{ textDecoration: 'none' }}>
+              <Button background='skyblue' text='Sensor List' />
+            </Link>
+            <CSVLink style={{ textDecoration: 'none' }} data={csvLinkData ?? []} headers={csvLinkHeaders} filename={`${weatherData?.channel.id}_${weatherData?.channel.description}.csv`}>
+              <Button background='#36A2EB' text='Export' />
+            </CSVLink>
           </div>
-          <CSVLink style={{ textDecoration: 'none' }} data={csvLinkData ?? []} headers={csvLinkHeaders} filename={`${weatherData?.channel.id}_${weatherData?.channel.description}.csv`}>
-            <Button background='#36A2EB' text='Export' />
-          </CSVLink>
         </div>
       </StyledNav>
       <Container>
@@ -146,6 +152,11 @@ const Container = styled.div`
 
   @media screen and (min-width: 800px) {
     margin-top: 84px;
+  }
+
+  .btnContainer {
+    display: flex;
+    align-items: center;
   }
 `;
 
