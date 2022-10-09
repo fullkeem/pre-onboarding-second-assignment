@@ -21,6 +21,8 @@ export const Table = ({ columns, data }: any) => {
 
   const { globalFilter, pageIndex, pageSize } = state;
 
+  const lowBattery = () => {};
+
   return (
     <StyledTable>
       <table {...getTableProps()}>
@@ -43,7 +45,17 @@ export const Table = ({ columns, data }: any) => {
             return (
               <tr {...row.getRowProps()}>
                 {row.cells.map((cell: any) => {
-                  return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
+                  let battery20OrLess = false;
+                  if (cell.column.Header === 'Bat.(%)') {
+                    if (Number(cell.value) <= 20) {
+                      battery20OrLess = true;
+                    }
+                  }
+                  return (
+                    <td {...cell.getCellProps()} style={battery20OrLess ? { color: 'red' } : { color: 'black' }}>
+                      {cell.render('Cell')}
+                    </td>
+                  );
                 })}
               </tr>
             );
@@ -100,12 +112,15 @@ const StyledFlex = styled.section`
   display: flex;
 `;
 
-const StyledTable = styled.section`
-  width: 90%;
+const StyledTable = styled.div`
+  width: 100%;
 
   table {
     width: 100%;
+    table-layout: fixed;
     border-collapse: collapse;
+    font-size: smaller;
+    line-height: 20px;
 
     thead,
     tbody {
@@ -114,9 +129,12 @@ const StyledTable = styled.section`
 
     td,
     th {
-      padding: 10px;
+      width: 100%;
+      padding: 5px 10px;
       border: 1px solid #2b78a2;
       text-align: center;
+      vertical-align: middle;
+      word-break: break-all;
     }
 
     th {
@@ -125,6 +143,7 @@ const StyledTable = styled.section`
     }
 
     tr {
+      width: 100%;
       &:hover {
         background-color: #b6dee7;
         color: white;
@@ -134,9 +153,10 @@ const StyledTable = styled.section`
 `;
 
 const StyledPagination = styled.div`
-  width: 30%;
+  width: 50%;
   margin: auto;
   margin-top: 20px;
+
   .pageIndex {
     font-weight: bold;
   }

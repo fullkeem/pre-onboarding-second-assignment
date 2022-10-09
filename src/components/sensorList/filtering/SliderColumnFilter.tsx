@@ -23,8 +23,11 @@ export const SliderColumnFilter = ({ column }: any) => {
         onChange={e => {
           setFilter(parseInt(e.target.value, 10));
         }}
+        style={{ width: '100%' }}
       />
-      <button onClick={() => setFilter(undefined)}>Off</button>
+      <button onClick={() => setFilter(undefined)} style={{ width: '100%' }}>
+        Off
+      </button>
     </>
   );
 };
