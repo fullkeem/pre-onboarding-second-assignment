@@ -18,10 +18,11 @@ export const SelectColumnFilter = ({ column }: any) => {
       onChange={e => {
         setFilter(e.target.value || undefined);
       }}
+      style={{ width: '100%' }}
     >
       <option value=''>All</option>
       {options.map((option: any, i) => (
-        <option key={i} value={option}>
+        <option key={i} value={option} style={{ width: '100%' }}>
           {option}
         </option>
       ))}

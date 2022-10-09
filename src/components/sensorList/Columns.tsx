@@ -60,12 +60,12 @@ export const Columns = [
   },
   {
     Header: 'F/W ver.',
-    accessor: 'shadow.hwVer',
+    accessor: 'shadow.fwVer',
     Filter: SelectColumnFilter,
   },
   {
     Header: 'H/W ver.',
-    accessor: 'shadow.fwVer',
+    accessor: 'shadow.hwVer',
     Filter: SelectColumnFilter,
   },
 ];
