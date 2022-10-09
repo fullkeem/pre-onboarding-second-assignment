@@ -1,12 +1,15 @@
 import axios from 'axios';
 import { useState, useEffect, useRef, useCallback } from 'react';
-import styled from 'styled-components';
+import { CSVLink } from 'react-csv';
+import { getResponsiveWidth } from '../../utils/getResponsiveWidth';
 import { SelectDate, WeatherData } from '../../interface';
 import LinearChart from './chart/LinearChart';
+import Button from '../buttons/Button';
+import Calendar from './Calendar';
+
+import styled from 'styled-components';
 import { AiFillPlusCircle, AiFillMinusCircle } from 'react-icons/ai';
 import { BsFillCalendarCheckFill } from 'react-icons/bs';
-import Calendar from './Calendar';
-import { getResponsiveWidth } from '../../utils/getResponsiveWidth';
 
 const CHANNEL_ID = 1348864;
 const API_KEY = '6SKW0U97IPV2QQV9';
@@ -60,6 +63,18 @@ const DataGraph = () => {
     setWidth((width * 5) / 6);
   }, [width]);
 
+  const csvLinkHeaders = [
+    { label: 'Created_at', key: 'Created_at' },
+    { label: 'Entry_id', key: 'Entry_id' },
+    { label: 'Temp', key: 'Temp' },
+    { label: 'Humidity', key: 'Humidity' },
+    { label: 'Pressure', key: 'Pressure' },
+  ];
+
+  const csvLinkData = weatherData?.feeds.map(data => {
+    return { Created_at: data.created_at, Entry_id: data.entry_id, Temp: data.field1, Humidity: data.field2, Pressure: data.field3 };
+  });
+
   return (
     <>
       {modal && <Calendar selectDate={selectDate} setSelectDate={setSelectDate} setModal={setModal} />}
@@ -81,6 +96,9 @@ const DataGraph = () => {
               <AiFillMinusCircle />
             </IconButton>
           </div>
+          <CSVLink style={{ textDecoration: 'none' }} data={csvLinkData ?? []} headers={csvLinkHeaders} filename={`${weatherData?.channel.id}_${weatherData?.channel.description}.csv`}>
+            <Button background='#36A2EB' text='Export' />
+          </CSVLink>
         </div>
       </StyledNav>
       <Container>
