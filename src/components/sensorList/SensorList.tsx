@@ -27,7 +27,7 @@ const SensorList = () => {
 };
 
 const StyledSection = styled.section`
-  width: 1280px;
+  width: 100%;
 `;
 
 export default SensorList;
