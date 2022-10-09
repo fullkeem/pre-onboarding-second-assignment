@@ -1,4 +1,5 @@
-import { usePagination, useTable, useGlobalFilter, useFilters } from 'react-table';
+import { usePagination, useTable, useGlobalFilter, useFilters, useSortBy } from 'react-table';
+import { BsFillCaretUpFill, BsFillCaretDownFill } from 'react-icons/bs';
 import styled from 'styled-components';
 
 import { GlobalFilter } from './filtering/GlobalFilter';
@@ -12,7 +13,8 @@ export const Table = ({ columns, data }: any) => {
     },
     useFilters,
     useGlobalFilter,
-    usePagination
+    usePagination,
+    useSortBy
   );
 
   const { globalFilter, pageIndex, pageSize } = state;
@@ -25,8 +27,9 @@ export const Table = ({ columns, data }: any) => {
           {headerGroups.map((headerGroup: any) => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column: any) => (
-                <th {...column.getHeaderProps()}>
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                   {column.render('Header')}
+                  <div>{column.isSorted ? column.isSortedDesc ? <BsFillCaretUpFill /> : <BsFillCaretDownFill /> : ''}</div>
                   <div> {column.canFilter ? column.render('Filter') : null}</div>
                 </th>
               ))}
