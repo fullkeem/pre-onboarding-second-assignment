@@ -88,5 +88,7 @@ npm run dev
 <br/>
 > 정세영 - table filtering 기능, pagination 기능 구현
 > <br/>
+> 김슬기 - table sorting 기능 구현 
+> <br/>
 
 #### 그래프 페이지
