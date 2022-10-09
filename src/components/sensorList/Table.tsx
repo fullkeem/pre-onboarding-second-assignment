@@ -13,8 +13,8 @@ export const Table = ({ columns, data }: any) => {
     },
     useFilters,
     useGlobalFilter,
-    usePagination,
-    useSortBy
+    useSortBy,
+    usePagination
   );
 
   const { globalFilter, pageIndex, pageSize } = state;
