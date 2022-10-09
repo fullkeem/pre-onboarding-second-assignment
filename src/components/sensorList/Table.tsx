@@ -2,8 +2,6 @@ import { usePagination, useTable, useGlobalFilter, useFilters, useSortBy } from 
 import { BsFillCaretUpFill, BsFillCaretDownFill } from 'react-icons/bs';
 import styled from 'styled-components';
 
-import { GlobalFilter } from './filtering/GlobalFilter';
-
 export const Table = ({ columns, data }: any) => {
   const { getTableProps, getTableBodyProps, headerGroups, page, nextPage, previousPage, canPreviousPage, canNextPage, pageOptions, gotoPage, pageCount, setPageSize, prepareRow, state, setGlobalFilter }: any = useTable(
     {
@@ -21,7 +19,6 @@ export const Table = ({ columns, data }: any) => {
 
   return (
     <StyledTable>
-      <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup: any) => (
@@ -66,7 +63,7 @@ export const Table = ({ columns, data }: any) => {
           {'<<'}
         </button>
         <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-          Previous
+          {'<'}
         </button>
         <span>
           Page{' '}
@@ -75,7 +72,7 @@ export const Table = ({ columns, data }: any) => {
           </span>{' '}
         </span>
         <button onClick={() => nextPage()} disabled={!canNextPage}>
-          Next
+          {'>'}
         </button>
         <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
           {'>>'}
@@ -93,7 +90,7 @@ export const Table = ({ columns, data }: any) => {
 };
 
 const StyledTable = styled.section`
-  width: 100%;
+  width: 90%;
 
   table {
     border-collapse: collapse;
@@ -113,6 +110,7 @@ const StyledTable = styled.section`
 `;
 
 const StyledPagination = styled.div`
+  border: 1px solid black;
   width: 40%;
   margin: auto;
   margin-top: 20px;
@@ -123,7 +121,13 @@ const StyledPagination = styled.div`
   .gotoFirstPage {
     margin-left: 15px;
   }
-
+  button {
+    background-color: white;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #6ea8c9;
+  }
   .pageSize {
     margin-left: 15px;
   }
