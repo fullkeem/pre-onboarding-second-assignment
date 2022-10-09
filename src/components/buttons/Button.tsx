@@ -15,6 +15,7 @@ const Buttons = ({ background, text, ...props }: ExpandBtnPropsData) => {
 
 const Button = styled.button<{ background: string }>`
   display: flex;
+  margin-top: 20px;
   padding: 10px 15px;
 
   background-color: ${props => props.background};
