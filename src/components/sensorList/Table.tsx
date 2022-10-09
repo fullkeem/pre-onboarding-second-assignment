@@ -2,8 +2,6 @@ import { usePagination, useTable, useGlobalFilter, useFilters, useSortBy } from 
 import { BsFillCaretUpFill, BsFillCaretDownFill } from 'react-icons/bs';
 import styled from 'styled-components';
 
-import { GlobalFilter } from './filtering/GlobalFilter';
-
 export const Table = ({ columns, data }: any) => {
   const { getTableProps, getTableBodyProps, headerGroups, page, nextPage, previousPage, canPreviousPage, canNextPage, pageOptions, gotoPage, pageCount, setPageSize, prepareRow, state, setGlobalFilter }: any = useTable(
     {
@@ -21,7 +19,6 @@ export const Table = ({ columns, data }: any) => {
 
   return (
     <StyledTable>
-      <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup: any) => (
@@ -93,7 +90,7 @@ export const Table = ({ columns, data }: any) => {
 };
 
 const StyledTable = styled.section`
-  width: 100%;
+  width: 90%;
 
   table {
     border-collapse: collapse;
