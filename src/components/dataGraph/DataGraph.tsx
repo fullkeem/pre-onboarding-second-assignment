@@ -97,7 +97,7 @@ const DataGraph = () => {
             </IconButton>
           </div>
           <CSVLink style={{ textDecoration: 'none' }} data={csvLinkData ?? []} headers={csvLinkHeaders} filename={`${weatherData?.channel.id}_${weatherData?.channel.description}.csv`}>
-            <Button background='#FF6384' text='Export' />
+            <Button background='#36A2EB' text='Export' />
           </CSVLink>
         </div>
       </StyledNav>

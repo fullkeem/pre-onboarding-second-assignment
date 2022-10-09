@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { BtnPropsData } from '../../interface';
 import styled from 'styled-components';
 
