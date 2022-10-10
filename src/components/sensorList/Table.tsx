@@ -52,7 +52,7 @@ export const Table = ({ columns, data }: any) => {
                     }
                   }
                   return (
-                    <td {...cell.getCellProps()} style={battery20OrLess ? { color: 'red' } : { color: 'black' }}>
+                    <td {...cell.getCellProps()} style={battery20OrLess === true ? { color: 'red' } : null}>
                       {cell.render('Cell')}
                     </td>
                   );
@@ -125,6 +125,16 @@ const StyledTable = styled.div`
     thead,
     tbody {
       width: 100%;
+      word-break: break-all;
+    }
+
+    tr {
+      width: 100%;
+
+      &:hover {
+        background-color: #b6dee7;
+        color: white;
+      }
     }
 
     td,
@@ -134,26 +144,16 @@ const StyledTable = styled.div`
       border: 1px solid #2b78a2;
       text-align: center;
       vertical-align: middle;
-      word-break: break-all;
     }
 
     th {
       background-color: #6ea8c9;
       color: white;
     }
-
-    tr {
-      width: 100%;
-      &:hover {
-        background-color: #b6dee7;
-        color: white;
-      }
-    }
   }
 `;
 
 const StyledPagination = styled.div`
-  width: 50%;
   margin: auto;
   margin-top: 20px;
 

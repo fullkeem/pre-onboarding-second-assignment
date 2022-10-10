@@ -88,6 +88,8 @@ npm run dev
 <br/>
 > 정세영 - table filtering 기능, pagination 기능 구현
 > <br/>
+> 김충만 - 센서 정보 리스트 데이터 저장, table UI 및 반응형 구현, 배터리 조건 추가
+> <br/>
 > 김슬기 - table sorting 기능 구현 
 > <br/>
 

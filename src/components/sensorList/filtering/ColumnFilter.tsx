@@ -5,7 +5,7 @@ export const ColumnFilter = ({ column }: any) => {
 
   return (
     <span style={{ color: 'lightgray' }}>
-      search: <input value={filterValue || ''} onChange={e => setFilter(e.target.value)} style={{ width: '100px' }}></input>
+      search: <input value={filterValue || ''} onChange={e => setFilter(e.target.value)} style={{ width: '100%' }}></input>
     </span>
   );
 };
