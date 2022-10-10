@@ -92,5 +92,11 @@ npm run dev
 > <br/>
 > 김슬기 - table sorting 기능 구현 
 > <br/>
+박유빈 - 버튼 UI, Graph page 이동 기능 구현
+<br/>
 
 #### 그래프 페이지
+
+<br/>
+박유빈 - 버튼 UI, Main page 이동 기능 구현, Export CSV 내보내기 기능 구현
+<br/>
