@@ -98,6 +98,7 @@ npm run dev
 #### 그래프 페이지
 
 <br/>
-이다익 - 그래프, 달력 
-박유빈 - 버튼 UI, Main page 이동 기능 구현, Export CSV 내보내기 기능 구현
+>이다익 - 날씨 정보 불러온 뒤 그래프 구현, 달력 UI 및 기능  
+> <br/>
+>박유빈 - 버튼 UI, Main page 이동 기능 구현, Export CSV 내보내기 기능 구현
 <br/>
